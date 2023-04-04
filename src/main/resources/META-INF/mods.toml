@@ -1,0 +1,26 @@
+modLoader = "javafml"
+loaderVersion = "[43,)"
+license = "All rights reserved"
+
+[[mods]]
+modId = "blazemek"
+version = "${version}"
+displayName = "Blaze Mek"
+authors="ErrorMikey"
+description = '''
+Tiny mod to help spawn blazes or wither skeletons when an entity attempts to spawn above dreadful dirt from mobgridingutils
+'''
+
+[[dependencies.blazemek]]
+modId = "forge"
+mandatory = true
+versionRange = "[43,)"
+ordering = "NONE"
+side = "BOTH"
+
+[[dependencies.blazemek]]
+modId = "minecraft"
+mandatory = true
+versionRange = "[1.19.2,)"
+ordering = "NONE"
+side = "BOTH"
