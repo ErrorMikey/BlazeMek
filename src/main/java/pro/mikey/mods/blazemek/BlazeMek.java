@@ -15,6 +15,7 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.common.util.Lazy;
 import net.minecraftforge.event.entity.living.LivingSpawnEvent;
+import net.minecraftforge.eventbus.api.Event;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -39,7 +40,7 @@ public class BlazeMek {
     }
 
     @SubscribeEvent
-    public void onEntitySpawned(LivingSpawnEvent event) {
+    public void onEntitySpawned(LivingSpawnEvent.CheckSpawn event) {
         LevelAccessor level = event.getLevel();
         if (!(level instanceof ServerLevel serverLevel)) return;
 
@@ -52,7 +53,7 @@ public class BlazeMek {
         BlockPos belowLocation = entity.blockPosition().below();
         var blockUnderEntity = serverLevel.getBlockState(belowLocation);
         if (!blockUnderEntity.isAir() && blockUnderEntity.getBlock() == underBlock.get()) {
-            event.setCanceled(true);
+            event.setResult(Event.Result.DENY);
             var shouldSpawnBlaze = serverLevel.getRandom().nextInt(100) > 30;
 
             var entityToSpawn = (shouldSpawnBlaze ? EntityType.BLAZE.create(serverLevel) : EntityType.WITHER_SKELETON.create(serverLevel));
